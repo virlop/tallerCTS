@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo de Etiquetas ARIA</title>
+    <style>
+        /* Estilos para el botón de activación del menú */
+        #boton-menu {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        /* Estilos para el menú desplegable */
+        #menu {
+            display: none;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+
+        /* Estilos para las opciones del menú */
+        #menu li {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Botón para abrir el menú con etiquetas ARIA -->
+    <button aria-expanded="false" id="boton-menu" aria-controls="menu">
+        Menú
+    </button>
+
+    <!-- Menú desplegable con etiquetas ARIA -->
+    <ul id="menu" aria-hidden="true" role="menu">
+        <li role="menuitem">Opción 1</li>
+        <li role="menuitem">Opción 2</li>
+        <li role="menuitem">Opción 3</li>
+    </ul>
+
+    <script>
+        // JavaScript para abrir y cerrar el menú
+        const botonMenu = document.getElementById('boton-menu');
+        const menu = document.getElementById('menu');
+
+        botonMenu.addEventListener('click', () => {
+            const isExpanded = botonMenu.getAttribute('aria-expanded') === 'true';
+            botonMenu.setAttribute('aria-expanded', !isExpanded);
+            menu.style.display = isExpanded ? 'none' : 'block';
+        });
+    </script>
+</body>
+</html>
