@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accessible Page Example</title>
+</head>
+<body>
+    <h1>Change Background Theme</h1>
+    <p>Click the button to change the background theme of the page.</p>
+    <button id="theme-button" role="button" aria-label="Change Theme" aria-describedby="theme-info">
+        Change Theme
+    </button>
+    <div id="theme-info" aria-hidden="true">
+        The theme has been changed to a new color scheme.
+    </div>
+
+    <script>
+        document.getElementById("theme-button").addEventListener("click", function() {
+            document.body.style.backgroundColor = getRandomColor();
+            document.getElementById("theme-info").style.display = "block";
+        });
+
+        function getRandomColor() {
+            var letters = "0123456789ABCDEF";
+            var color = "#";
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</body>
+</html>
