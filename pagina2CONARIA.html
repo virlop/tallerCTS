@@ -1,33 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Accessible Page Example</title>
+  <meta charset="UTF-8">
+  <title>Ejemplo CON ARIA </title>
 </head>
 <body>
-    <h1>Change Background Theme</h1>
-    <p>Click the button to change the background theme of the page.</p>
-    <button id="theme-button" role="button" aria-label="Change Theme" aria-describedby="theme-info">
-        Change Theme
-    </button>
-    <div id="theme-info" aria-hidden="true" style="display: none;">
-        The theme has been changed to a new color scheme.
-    </div>
+  <h1>Ejemplo CON ARIA </h1>
 
-    <script>
-        document.getElementById("theme-button").addEventListener("click", function() {
-            document.body.style.backgroundColor = getRandomColor();
-            document.getElementById("theme-info").style.display = "block";
-        });
+  <!-- Cambio de Color de Fondo CON ARIA -->
+  <button id="colorButton" aria-label="Cambiar Color de Fondo">Cambiar Color de Fondo</button>
+  <div id="content" style="background-color: #f0f0f0; padding: 20px;">
+    <p>Este es un ejemplo de cambio de color de fondo CON ARIA.</p>
+  </div>
 
-        function getRandomColor() {
-            var letters = "0123456789ABCDEF";
-            var color = "#";
-            for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
-    </script>
+  <!-- Menú Desplegable CON ARIA Corregido -->
+  <button id="menuButton" aria-expanded="false" aria-haspopup="menu">Abrir Menú</button>
+  <ul id="menu" role="menu" aria-labelledby="menuButton" style="display: none;">
+    <li role="menuitem" tabindex="0">Opción 1</li>
+    <li role="menuitem" tabindex="0">Opción 2</li>
+    <li role="menuitem" tabindex="0">Opción 3</li>
+  </ul>
+
+  <script>
+    // Cambio de Color de Fondo CON ARIA
+    const colorButton = document.getElementById('colorButton');
+    const content = document.getElementById('content');
+    const colors = ['#FFD700', '#87CEEB', '#98FB98', '#FFA07A'];
+    let currentIndex = 0;
+
+    colorButton.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % colors.length;
+      const newColor = colors[currentIndex];
+      content.style.backgroundColor = newColor;
+      content.setAttribute('aria-live', 'polite');
+      content.textContent = `Fondo cambiado a color ${currentIndex + 1}`;
+    });
+
+    // Menú Desplegable CON ARIA Corregido
+    const menuButton = document.getElementById('menuButton');
+    const menu = document.getElementById('menu');
+    let isMenuOpen = false;
+
+    menuButton.addEventListener('click', () => {
+      isMenuOpen = !isMenuOpen;
+      menuButton.setAttribute('aria-expanded', isMenuOpen.toString());
+      menu.style.display = isMenuOpen ? 'block' : 'none';
+    });
+  </script>
 </body>
 </html>
